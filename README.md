@@ -1,4 +1,4 @@
-# coinori
+# CoinMachine_mk2
 
 
 mac m1 기준 환경 구축 방법
