@@ -4,7 +4,7 @@ from flask_restx import Resource, Api, Namespace, fields
 
 todos = {}
 count = 1
-
+# flask 스웨거 작성 예시
 
 Todo = Namespace(
     name="Todos",
