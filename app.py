@@ -11,8 +11,6 @@ import time
 import requests
 import json
 
-from test import day_max_price, check_market
-
 
 app = Flask(__name__)
 api = Api(
@@ -47,44 +45,33 @@ class HelloWorld(Resource):
 
 
 # -----------------------
-# 전역 변수 정의
-predict_response = None
+
+# # 전역 변수 정의
+# predict_response = None
 
 
-# send_api 함수 정의
-def send_api(path, method, body=None):
-    API_HOST = "http://127.0.0.1:800"
-    url = API_HOST + path
-    headers = {"Content-Type": "application/json", "charset": "UTF-8", "Accept": "*/*"}
-    response = None
-    try:
-        if method == "GET":
-            response = requests.get(url, headers=headers)
-        elif method == "POST":
-            response = requests.post(url, headers=headers, data=json.dumps(body))
-        print("response status %r" % response.status_code)
-        print("response text %r" % response.text)
-    except Exception as ex:
-        print(ex)
-    return response
+# # send_api 함수 정의
+# def send_api(path, method, body=None):
+#     API_HOST = "http://127.0.0.1:800"
+#     url = API_HOST + path
+#     headers = {"Content-Type": "application/json", "charset": "UTF-8", "Accept": "*/*"}
+#     response = None
+#     try:
+#         if method == "GET":
+#             response = requests.get(url, headers=headers)
+#         elif method == "POST":
+#             response = requests.post(url, headers=headers, data=json.dumps(body))
+#         print("response status %r" % response.status_code)
+#         print("response text %r" % response.text)
+#     except Exception as ex:
+#         print(ex)
+#     return response
 
 
-def get_predict_price():
-    get_predict_price_url = "/upbit/moving-average/KRW/BTC/minute30/144"
-    predict_response = send_api(get_predict_price_url, "GET")
-    print("Predict response:", predict_response)
-
-
-# 스케줄러를 별도의 스레드에서 실행
-def run_schedule():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
-
-# 스케줄러 스레드 시작
-scheduler_thread = threading.Thread(target=run_schedule, daemon=True)
-scheduler_thread.start()
+# def get_predict_price():
+#     get_predict_price_url = "/upbit/moving-average/KRW/BTC/minute30/144"
+#     predict_response = send_api(get_predict_price_url, "GET")
+#     print("Predict response:", predict_response)
 
 
 # -----------------------
@@ -94,5 +81,4 @@ api.add_namespace(Upbit, "/upbit")
 api.add_namespace(Slack, "/slack")
 
 if __name__ == "__main__":
-    schedule.every(7).seconds.do(check_market)
     app.run(debug=True, host="0.0.0.0", port=800)

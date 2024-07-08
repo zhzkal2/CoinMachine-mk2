@@ -228,7 +228,7 @@ class MovingAverage(Resource):
         }
 
 # 원화로 비트코인을 시장가 구매
-@Upbit.route("/buy-market-order/<string:code>/<string:ticker>/<int:amount>")
+@Upbit.route("/buy-market-order/<string:code>/<string:ticker>/<float:amount>")
 @Upbit.doc(params={"code": "KRW", "ticker": "BTC", "amount": "5500"})
 class BuyMarketOrder(Resource):
     @Upbit.response(200, "Success")
