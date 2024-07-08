@@ -35,26 +35,26 @@ class CurrentPrice(Resource):
             msg = errorText
         return {"ticker": ticker, "ask_price": price, "msg": msg}
 
-
-@Upbit.route("/price-start/<string:code>/<string:ticker>")
-@Upbit.doc(params={"code": "KRW", "ticker": "BTC"})
-class StartPrice(Resource):
-    @Upbit.response(200, "Success")
-    @Upbit.response(500, "Failed")
-    def get(self, code, ticker):
-        msg = successText
-        price = 0
-        try:
-            """Upbit ticker에 해당하는 현재 가격을 가져옵니다.."""
-            print(
-                pyupbit.get_orderbook(code + pairSeporator + ticker)["orderbook_units"]
-            )
-            price = pyupbit.get_orderbook(code + pairSeporator + ticker)[
-                "orderbook_units"
-            ][0]["ask_price"]
-        except:
-            msg = errorText
-        return {"ticker": ticker, "ask_price": price, "msg": msg}
+# 중복제거 검토
+# @Upbit.route("/price-start/<string:code>/<string:ticker>")
+# @Upbit.doc(params={"code": "KRW", "ticker": "BTC"})
+# class StartPrice(Resource):
+#     @Upbit.response(200, "Success")
+#     @Upbit.response(500, "Failed")
+#     def get(self, code, ticker):
+#         msg = successText
+#         price = 0
+#         try:
+#             """Upbit ticker에 해당하는 현재 가격을 가져옵니다.."""
+#             print(
+#                 pyupbit.get_orderbook(code + pairSeporator + ticker)["orderbook_units"]
+#             )
+#             price = pyupbit.get_orderbook(code + pairSeporator + ticker)[
+#                 "orderbook_units"
+#             ][0]["ask_price"]
+#         except:
+#             msg = errorText
+#         return {"ticker": ticker, "ask_price": price, "msg": msg}
 
 
 @Upbit.route(
