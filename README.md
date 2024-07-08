@@ -9,7 +9,7 @@
 
 # API Server
 
-src = "./api.png"
+<src = "./api.png">
 - balance : ticker에 해당하는 코인이나 화폐를 현재 보유한 만큼 return합니다.
 - best kvalue : 변동성 돌파 전략을 구하는 api로 count 기간 중 브루트포스로 k값을 0.01부터 1까지 탐색하여 최고의 결과를 가진 k 값을 구하고 return합니다.
 - buy-market-order : amount만큼을 시장가로 구매하고 return합니다.
